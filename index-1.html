@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una persona mal informada es una víctima más</title>
+<style>
+:root{--blue:#073b78;--blue2:#0d5aa7;--light:#eef7ff;--text:#17324d;--white:#fff;--green:#2d8b57}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:#f5f9fd}
+header{background:#fff;border-bottom:4px solid var(--blue);position:sticky;top:0;z-index:10}
+.nav{max-width:1200px;margin:auto;padding:14px 20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.logo{font-weight:800;color:var(--blue);font-size:20px;line-height:1.1;margin-right:auto}
+.logo small{display:block;font-size:11px;font-weight:500}
+nav{display:flex;gap:8px;flex-wrap:wrap}button,.btn{border:0;border-radius:10px;padding:11px 15px;cursor:pointer;font-weight:700;background:var(--blue);color:#fff}
+nav button{background:transparent;color:var(--blue)}nav button:hover,nav button.active{background:var(--light)}
+.controls{display:flex;gap:8px;align-items:center}
+.hero{background:linear-gradient(135deg,#dff3ff,#fff);padding:55px 20px}
+.hero-inner{max-width:1100px;margin:auto}
+.hero h1{font-size:clamp(32px,6vw,58px);margin:0 0 12px;color:#062e68}
+.hero p{font-size:20px;max-width:760px;line-height:1.5}
+main{max-width:1100px;margin:auto;padding:30px 20px}
+.page{display:none}.page.active{display:block}
+h2{font-size:32px;color:var(--blue);margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 4px 18px #0a42721a;border:1px solid #dceaf6}
+.card h3{color:var(--blue);margin-top:0}
+.card p{line-height:1.55}
+.tag{display:inline-block;background:#e6f3ff;color:var(--blue);padding:6px 10px;border-radius:20px;font-size:13px;font-weight:700}
+.search{width:100%;padding:15px;border:2px solid #cfe0ef;border-radius:12px;font-size:16px;margin-bottom:20px}
+.notice{background:#e9f6ee;border-left:6px solid var(--green);padding:16px;border-radius:10px;margin:18px 0}
+.right-card{cursor:pointer}.right-card:hover{transform:translateY(-2px);transition:.15s}
+.detail{display:none;margin-top:20px}.detail.show{display:block}
+footer{background:var(--blue);color:#fff;padding:28px 20px;margin-top:40px}
+.footer-inner{max-width:1100px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.access{font-size:14px}
+@media(max-width:760px){.nav{padding:10px}.hero{padding:35px 16px}main{padding:22px 14px}nav{width:100%;order:3}.controls{margin-left:0}}
+.detail{border:2px solid #b8d8ef;background:#fbfdff;animation:appear .2s ease}
+.detail h4{color:var(--blue);margin-bottom:6px}
+.detail p{line-height:1.65}
+@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.lang-on{background:#e7f5ec!important;color:#17633b!important}
+.lang-note{font-size:13px;color:#47657d;margin-top:10px}
+</style>
+</head>
+<body>
+<header>
+<div class="nav">
+<div class="logo">✋⚖️ Una persona mal informada es una víctima más<small>Plataforma de información ciudadana</small></div>
+<nav>
+<button data-page="inicio">Inicio</button>
+<button data-page="derechos">Mis derechos</button>
+<button data-page="obligaciones">Mis obligaciones</button>
+<button data-page="vulneracion">¿Qué hago si vulneran mi derecho?</button>
+<button data-page="acudir">¿Dónde puedo acudir?</button>
+</nav>
+<div class="controls"><button id="listen">🔊 Escuchar</button><button id="lang">🌐 Quechua</button></div>
+</div>
+</header>
+
+<section class="hero">
+<div class="hero-inner">
+<span class="tag">Información clara, accesible e inclusiva</span>
+<h1 id="heroTitle">Conoce tus derechos. Compréndelos. Defiéndelos.</h1>
+<p id="heroText">Esta plataforma explica derechos y obligaciones con palabras sencillas, ejemplos cotidianos y orientación básica para saber dónde buscar ayuda.</p>
+</div>
+</section>
+
+<main>
+<section id="inicio" class="page active">
+<h2>Bienvenido/a</h2>
+<div class="grid">
+<div class="card"><h3>⚖️ Mis derechos</h3><p>Consulta derechos explicados de manera sencilla, sin depender de conocimientos jurídicos.</p><button data-page="derechos">Ver derechos</button></div>
+<div class="card"><h3>📋 Mis obligaciones</h3><p>Conoce responsabilidades que ayudan a construir una convivencia respetuosa.</p><button data-page="obligaciones">Ver obligaciones</button></div>
+<div class="card"><h3>❓ Si vulneran un derecho</h3><p>Encuentra una orientación básica sobre qué puedes hacer y qué información reunir.</p><button data-page="vulneracion">Ver orientación</button></div>
+</div>
+<div class="notice"><strong>Importante:</strong> esta plataforma es informativa. Para recibir orientación o presentar una denuncia, acude a la institución competente.</div>
+<div class="card"><h3>🎯 Así funciona la plataforma</h3><p><strong>1.</strong> Elige un derecho u obligación. <strong>2.</strong> Lee una explicación sencilla. <strong>3.</strong> Consulta un ejemplo cotidiano. <strong>4.</strong> Revisa qué puedes hacer o dónde buscar orientación.</p></div>
+</section>
+
+<section id="derechos" class="page">
+<h2>Mis derechos</h2>
+<p>Selecciona un derecho para conocer su significado, un ejemplo cotidiano y qué hacer ante una posible vulneración.</p>
+<input class="search" id="rightSearch" placeholder="🔎 Buscar un derecho...">
+
+<div class="grid" id="rightsGrid">
+<div class="card right-card" data-title="educacion">
+<h3>📚 Derecho a la educación</h3>
+<p>Acceso a la educación sin discriminación.</p>
+<button>Ver ejemplo</button>
+</div>
+<div class="card right-card" data-title="igualdad">
+<h3>🤝 Derecho a la igualdad</h3>
+<p>Trato digno y sin discriminación.</p>
+<button>Ver ejemplo</button>
+</div>
+<div class="card right-card" data-title="informacion">
+<h3>ℹ️ Derecho a la información</h3>
+<p>Acceso a información que corresponde recibir.</p>
+<button>Ver ejemplo</button>
+</div>
+</div>
+
+<div id="rightDetail" class="card detail">
+<span class="tag">Explicación en lenguaje sencillo</span>
+<h3 id="detailTitle"></h3>
+<p id="detailMeaning"></p>
+<h4>📌 Ejemplo cotidiano</h4>
+<p id="detailExample"></p>
+<h4>⚠️ ¿Cómo podría vulnerarse?</h4>
+<p id="detailViolation"></p>
+<h4>📝 ¿Qué puedo hacer?</h4>
+<p id="detailAction"></p>
+<button id="speakRight">🔊 Escuchar esta explicación</button>
+</div>
+</section>
+
+<section id="obligaciones" class="page">
+<h2>Mis obligaciones</h2>
+<p>Las obligaciones son responsabilidades que debemos cumplir para favorecer una convivencia respetuosa.</p>
+
+<div class="grid">
+<div class="card obligation-card">
+<h3>🤝 Respetar los derechos de otras personas</h3>
+<p>Significa tratar a los demás con respeto y evitar acciones que afecten sus derechos.</p>
+<button class="ob-card" data-ob="respeto">Ver ejemplo</button>
+</div>
+<div class="card obligation-card">
+<h3>⚖️ Cumplir las leyes y normas</h3>
+<p>Significa respetar las normas que organizan la convivencia y la vida en sociedad.</p>
+<button class="ob-card" data-ob="leyes">Ver ejemplo</button>
+</div>
+<div class="card obligation-card">
+<h3>🌱 Cuidar el medio ambiente</h3>
+<p>Significa actuar responsablemente para proteger nuestro entorno y los recursos naturales.</p>
+<button class="ob-card" data-ob="ambiente">Ver ejemplo</button>
+</div>
+</div>
+
+<div id="obligationDetail" class="card detail">
+<span class="tag">Explicación en lenguaje sencillo</span>
+<h3 id="obTitle"></h3>
+<p id="obMeaning"></p>
+<h4>📌 Ejemplo cotidiano</h4>
+<p id="obExample"></p>
+<h4>💡 ¿Por qué es importante?</h4>
+<p id="obImportance"></p>
+<button id="speakObligation">🔊 Escuchar esta explicación</button>
+</div>
+</section>
+
+<section id="vulneracion" class="page">
+<h2>¿Qué hago si vulneran mi derecho?</h2>
+<div class="grid">
+<div class="card"><h3>1. Identifica la situación</h3><p>Describe qué ocurrió, cuándo ocurrió y qué derecho consideras afectado.</p></div>
+<div class="card"><h3>2. Reúne información</h3><p>Guarda documentos, mensajes, fotografías u otros elementos relacionados con el caso, cuando corresponda.</p></div>
+<div class="card"><h3>3. Busca orientación</h3><p>Acude a la institución que corresponda para conocer las opciones disponibles.</p></div>
+<div class="card"><h3>4. No te quedes sin información</h3><p>Si no comprendes un término jurídico, solicita que te lo expliquen en un lenguaje claro.</p></div>
+</div>
+<div class="notice"><strong>La plataforma no reemplaza la atención institucional.</strong> Su finalidad es ayudarte a comprender la información y encontrar el canal adecuado.</div>
+</section>
+
+<section id="acudir" class="page">
+<h2>¿Dónde puedo acudir?</h2>
+<p>Cuando necesites orientación o protección, busca la institución competente para tu situación.</p>
+<div class="grid">
+<div class="card"><h3>🏛️ Defensoría del Pueblo</h3><p>Información, orientación y mecanismos institucionales relacionados con la defensa de derechos.</p><button>Más información</button></div>
+<div class="card"><h3>👧 Defensoría de la Niñez y Adolescencia</h3><p>Orientación y protección para situaciones que involucren a niñas, niños y adolescentes.</p></div>
+<div class="card"><h3>♿ Servicios para personas con discapacidad</h3><p>Busca orientación en los servicios e instituciones correspondientes.</p></div>
+<div class="card"><h3>📍 Oficinas y atención</h3><p>Consulta la institución y oficina que corresponda según tu ciudad y situación.</p></div>
+</div>
+<div class="notice"><strong>Recuerda:</strong> antes de actuar, asegúrate de comprender qué institución puede ayudarte y qué documentos o información podrían solicitarte.</div>
+</section>
+</main>
+
+<footer><div class="footer-inner"><div><strong>Una persona mal informada es una víctima más</strong><br>Proyecto de información ciudadana</div><div class="access">♿ Accesibilidad · 🔊 Audio · CC Subtítulos · 🌐 Castellano / Quechua</div></div></footer>
+
+<script>
+const pages=[...document.querySelectorAll('.page')];
+function showPage(id){
+ pages.forEach(p=>p.classList.toggle('active',p.id===id));
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-page]');
+ if(b) showPage(b.dataset.page);
+});
+const data = {
+  educacion: {
+    es:{title:'📚 Derecho a la educación',meaning:'Es el derecho de toda persona a acceder a la educación y desarrollar sus capacidades sin discriminación.',example:'Una estudiante quiere continuar sus estudios y necesita orientación sobre las opciones educativas disponibles.',violation:'Podría existir una vulneración cuando se impide injustificadamente el acceso o se discrimina a una persona en el ámbito educativo.',action:'Anota lo ocurrido, conserva la información relacionada y busca orientación en la institución competente.'},
+    qu:{title:'📚 Yachaypaq derechu',meaning:'Tukuy runakuna yachayman chayayta, yachakuyninta wiñachiyta atinku, mana qharichasqa kawsaymanta rakisqa kanku.',example:'Yachaq warmi yachakuyninta qatichiyta munan, chayrayku yachaypaq imayna chayayta tapukun.',violation:'Yachayman mana allinpaq harkasqa utaq runata rakispa trato ruwasqa kaptinqa, derechun mana allinchasqa kanman.',action:'Imayna kasqanta qillqay, willakuykunata waqaychay, chaymanta yanapayta mañakuy.'}
+  },
+  igualdad: {
+    es:{title:'🤝 Derecho a la igualdad',meaning:'Todas las personas tienen igual dignidad y deben recibir un trato sin discriminación.',example:'Una persona solicita un servicio y espera recibir atención sin que su origen, idioma, forma de vestir u otra condición sea utilizada para darle un trato discriminatorio.',violation:'Podría existir una vulneración cuando una persona recibe un trato desfavorable por una condición protegida por la normativa.',action:'Registra qué ocurrió, cuándo ocurrió y quiénes participaron. Luego busca orientación por los canales correspondientes.'},
+    qu:{title:'🤝 Kikin kaypaq derechu',meaning:'Tukuy runakuna kikin chaninmi kanchik, mana rakisqa ni qharichasqa trato kanan.',example:'Runaqa huk serviciota mañakun, chaypi mana llaqtanmanta, siminmanta utaq pacha churakuyninmanta rakisqa kananchu.',violation:'Runata imayna kasqanrayku mana allin trato ruwasqa kaptinqa, derechun mana allinchasqa kanman.',action:'Imayna kasqanta, haykapi pacha kasqanta qillqay, chaymanta yanapayta mañakuy.'}
+  },
+  informacion: {
+    es:{title:'ℹ️ Derecho a la información',meaning:'Permite buscar y recibir información que corresponde conocer, dentro de los límites establecidos por la normativa.',example:'Una persona necesita entender un trámite público y solicita información clara sobre los requisitos y pasos que debe seguir.',violation:'Podría existir un problema cuando se obstaculiza injustificadamente el acceso a información que corresponde recibir.',action:'Solicita información por los canales establecidos y pide que los términos técnicos sean explicados de manera comprensible.'},
+    qu:{title:'ℹ️ Willakuyta yachaypaq derechu',meaning:'Runakuna paykunata chayachiq willakuyta maskayta, chaskiyta atinku, kamachiykunapa sayayninpi.',example:'Huk runa trámite público imayna ruwakunanta yachayta munan, chayrayku requisitoskunata sut\'i simipi mañakun.',violation:'Chaskinapaq willakuyta mana chaninpaq harkasqa kaptinqa, problema kanman.',action:'Willakuyta mañakuy, chaymanta sasa simikunata sut\'i simipi willasqa kananpaq mañakuy.'}
+  }
+};
+
+const obligations = {
+  respeto: {
+    es:{title:'🤝 Respetar los derechos de otras personas',meaning:'Implica reconocer que las demás personas también tienen derechos y deben ser tratadas con dignidad.',example:'No discriminar, insultar, amenazar o realizar acciones que afecten injustamente a otra persona.',importance:'El respeto ayuda a prevenir conflictos y situaciones de vulneración de derechos.'},
+    qu:{title:'🤝 Huk runakunapa derechunta respetay',meaning:'Huk runakunapas derechuyuqmi kanku, chayrayku chaninwan trato ruwana.',example:'Mana qharichay, mana phiñachiy, mana manchachiy, ni huk runata mana allinpaq ruray.',importance:'Respetayqa chaylla kawsayta yanapan, chaymanta conflictos-ta pisiyachin.'}
+  },
+  leyes: {
+    es:{title:'⚖️ Cumplir las leyes y normas',meaning:'Implica respetar las normas que organizan la convivencia y establecen responsabilidades.',example:'Cumplir las normas aplicables a una actividad, trámite o espacio público y actuar responsablemente.',importance:'Las normas permiten organizar la convivencia y establecer responsabilidades.'},
+    qu:{title:'⚖️ Kamachiykunata hunt’ay',meaning:'Kawsaypi allin tiyanapaq kamachiykunata respetana, chaymanta responsabilidadeskunata hunt’ana.',example:'Huk actividadpi, trámitepi utaq público pampapi kamachiykunata respetay.',importance:'Kamachiykunaqa runakunapa kawsayninta allinta organizayta yanapan.'}
+  },
+  ambiente: {
+    es:{title:'🌱 Cuidar el medio ambiente',meaning:'Implica actuar responsablemente para proteger el entorno y los recursos naturales.',example:'Evitar arrojar residuos en espacios públicos y utilizar responsablemente el agua y otros recursos.',importance:'El cuidado del entorno contribuye al bienestar de la comunidad y de las generaciones futuras.'},
+    qu:{title:'🌱 Pacha mamata waqaychay',meaning:'Pacha mamata, yaku, allpata, wayrata ima allinta waqaychaymi kan.',example:'Mana q’upa k’uchupi churanachu, yakuta allinlla llamk’achina, pachata qhawana.',importance:'Pacha mamata waqaychayqa aylluypa, wawakunapa, hamuq pachakunapa allin kawsayninta yanapan.'}
+  }
+};
+
+let currentLang = 'es';
+
+const ui = {
+  es:{
+    heroTitle:'Conoce tus derechos. Compréndelos. Defiéndelos.',
+    heroText:'Esta plataforma explica derechos y obligaciones con palabras sencillas, ejemplos cotidianos y orientación básica para saber dónde buscar ayuda.',
+    welcome:'Bienvenido/a', rights:'Mis derechos', obligations:'Mis obligaciones',
+    vuln:'¿Qué hago si vulneran mi derecho?', where:'¿Dónde puedo acudir?',
+    search:'🔎 Buscar un derecho...', example:'Ver ejemplo', listen:'🔊 Escuchar',
+    lang:'🌐 Quechua'
+  },
+  qu:{
+    heroTitle:'Derechuykita riqsiy. Entiendey. Waqaychay.',
+    heroText:'Kay plataformaqa derechokunata, obligacioneskunata ima mana sasachu simipi, sapa p’unchaw ejemploswan, yanapayta maypi maskanapaq willakun.',
+    welcome:'Allin hamuy', rights:'Derechoykuna', obligations:'Obligacionkuna',
+    vuln:'¿Imata ruwani derechoyta mana respetasqa kaptin?', where:'¿Maypita yanapayta mañakuyta atini?',
+    search:'🔎 Huk derechota maskay...', example:'Ejemplota qhaway', listen:'🔊 Uyariy',
+    lang:'🌐 Castellano'
+  }
+};
+
+function applyLanguage(){
+  const t=ui[currentLang];
+  document.documentElement.lang=currentLang==='qu'?'qu':'es';
+  document.getElementById('heroTitle').textContent=t.heroTitle;
+  document.getElementById('heroText').textContent=t.heroText;
+  const welcome=document.querySelector('#inicio h2'); if(welcome) welcome.textContent=t.welcome;
+  document.querySelectorAll('nav button')[0].textContent='Inicio';
+  document.querySelectorAll('nav button')[1].textContent=t.rights;
+  document.querySelectorAll('nav button')[2].textContent=t.obligations;
+  document.querySelectorAll('nav button')[3].textContent=t.vuln;
+  document.querySelectorAll('nav button')[4].textContent=t.where;
+  document.getElementById('rightSearch').placeholder=t.search;
+  document.getElementById('listen').textContent=t.listen;
+  document.getElementById('lang').textContent=t.lang;
+  document.getElementById('lang').classList.toggle('lang-on',currentLang==='qu');
+
+  document.querySelectorAll('.right-card').forEach(card=>{
+    const d=data[card.dataset.title][currentLang];
+    card.querySelector('h3').textContent=d.title;
+    card.querySelector('p').textContent=d.meaning;
+    card.querySelector('button').textContent=t.example;
+  });
+  document.querySelectorAll('.ob-card').forEach(btn=>btn.textContent=t.example);
+
+  const obCards=document.querySelectorAll('.obligation-card');
+  ['respeto','leyes','ambiente'].forEach((key,i)=>{
+    const d=obligations[key][currentLang];
+    if(obCards[i]){
+      obCards[i].querySelector('h3').textContent=d.title;
+      obCards[i].querySelector('p').textContent=d.meaning;
+    }
+  });
+}
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showRight(key){
+  const d=data[key][currentLang];
+  document.getElementById('detailTitle').textContent=d.title;
+  document.getElementById('detailMeaning').textContent=d.meaning;
+  document.getElementById('detailExample').textContent=d.example;
+  document.getElementById('detailViolation').textContent=d.violation;
+  document.getElementById('detailAction').textContent=d.action;
+  document.getElementById('rightDetail').classList.add('show');
+  document.getElementById('rightDetail').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function showObligation(key){
+  const d=obligations[key][currentLang];
+  document.getElementById('obTitle').textContent=d.title;
+  document.getElementById('obMeaning').textContent=d.meaning;
+  document.getElementById('obExample').textContent=d.example;
+  document.getElementById('obImportance').textContent=d.importance;
+  document.getElementById('obligationDetail').classList.add('show');
+  document.getElementById('obligationDetail').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+document.querySelectorAll('[data-page]').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.page)));
+document.querySelectorAll('.right-card').forEach(card=>card.addEventListener('click',()=>showRight(card.dataset.title)));
+document.querySelectorAll('.ob-card').forEach(btn=>btn.addEventListener('click',()=>showObligation(btn.dataset.ob)));
+
+document.getElementById('rightSearch').addEventListener('input',e=>{
+  const q=e.target.value.toLowerCase().trim();
+  document.querySelectorAll('.right-card').forEach(card=>card.style.display=card.innerText.toLowerCase().includes(q)?'':'none');
+});
+
+function speak(text){
+  if(!('speechSynthesis' in window)){alert('La lectura por voz no está disponible en este navegador.');return;}
+  speechSynthesis.cancel();
+  const utter=new SpeechSynthesisUtterance(text);
+  const voices=speechSynthesis.getVoices();
+  const wanted=currentLang==='qu'?['quh','qu','que','qu-BO']:['es-BO','es-ES','es'];
+  let voice=voices.find(v=>wanted.includes(v.lang.toLowerCase()));
+  if(!voice && currentLang==='qu') voice=voices.find(v=>v.lang.toLowerCase().startsWith('qu'));
+  if(voice){utter.voice=voice; utter.lang=voice.lang;}
+  else {utter.lang=currentLang==='qu'?'qu-BO':'es-BO';}
+  utter.rate=currentLang==='qu'?0.82:0.95;
+  speechSynthesis.speak(utter);
+}
+
+document.getElementById('listen').addEventListener('click',()=>{
+  speak(document.querySelector('.page.active').innerText);
+});
+document.getElementById('speakRight').addEventListener('click',()=>speak(document.getElementById('rightDetail').innerText));
+document.getElementById('speakObligation').addEventListener('click',()=>speak(document.getElementById('obligationDetail').innerText));
+
+document.getElementById('lang').addEventListener('click',()=>{
+  currentLang=currentLang==='es'?'qu':'es';
+  applyLanguage();
+});
+
+if('speechSynthesis' in window && speechSynthesis.onvoiceschanged!==undefined){
+  speechSynthesis.onvoiceschanged=()=>{};
+}
+showPage('inicio');
+applyLanguage();
+</script>
+</body>
+</html>
